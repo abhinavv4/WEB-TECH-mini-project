@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Rock Paper Scissors</title>
+    <link rel="stylesheet" href="min_project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="main-card">
+        <h1 class="title">RPS GAME</h1>
+        
+        <div class="score-board">
+            <div class="score-box">
+                <span class="label">YOU</span>
+                <span id="player-score">0</span>
+            </div>
+            <div class="score-box">
+                <span class="label">COMP</span>
+                <span id="comp-score">0</span>
+            </div>
+        </div>
+
+        <div class="battle-ground">
+            <div class="hand-display" id="player-hand">
+                <i class="fas fa-hand-back-fist"></i>
+            </div>
+            <div class="vs-badge">VS</div>
+            <div class="hand-display" id="comp-hand">
+                <i class="fas fa-hand-back-fist"></i>
+            </div>
+        </div>
+
+        <h2 id="result-text">Choose Your Weapon</h2>
+
+        <div class="controls">
+            <button class="btn" onclick="play('rock')"><i class="fas fa-hand-fist"></i></button>
+            <button class="btn" onclick="play('paper')"><i class="fas fa-hand-paper"></i></button>
+            <button class="btn" onclick="play('scissors')"><i class="fas fa-hand-scissors"></i></button>
+        </div>
+
+        <button class="reset-link" onclick="resetGame()">Reset Match</button>
+    </div>
+
+    <script src="mini.js"></script>
+</body>
+</html>

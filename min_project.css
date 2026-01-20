@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0f0c29; /* Dark Navy */
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+    font-family: 'Poppins', sans-serif;
+}
+
+.main-card {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    width: 380px;
+    backdrop-filter: blur(15px);
+}
+
+.title {
+    font-family: 'Orbitron', sans-serif;
+    color: #00d2ff;
+    letter-spacing: 4px;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+}
+
+.score-board {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.score-box {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 25px;
+    border-radius: 15px;
+    border-bottom: 3px solid #00d2ff;
+}
+
+.label { font-size: 0.7rem; color: #aaa; display: block; }
+#player-score, #comp-score { font-size: 1.5rem; font-weight: bold; color: white; }
+
+.battle-ground {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.hand-display {
+    font-size: 3rem;
+    color: #ffd700;
+    filter: drop-shadow(0 0 10px rgba(255,215,0,0.4));
+}
+
+.vs-badge {
+    background: #ff0055;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 0.8rem;
+}
+
+#result-text {
+    font-size: 1.2rem;
+    color: white;
+    margin-bottom: 30px;
+    height: 30px;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    color: #302b63;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn:hover {
+    background: #00d2ff;
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,210,255,0.4);
+}
+
+.reset-link {
+    background: none;
+    border: none;
+    color: #aaa;
+    margin-top: 30px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    text-decoration: underline;
+}
