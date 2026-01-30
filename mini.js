@@ -1,52 +1,107 @@
-let pScore = 0;
-let cScore = 0;
+let playerScore = 0;
+let computerScore = 0;
 
 const icons = {
     rock: 'fa-hand-fist',
     paper: 'fa-hand-paper',
-    scissors: 'fa-hand-scissors'
+    scissors: 'fa-hand-scissors',
+    default: 'fa-hand-back-fist'
 };
 
-function play(playerChoice) {
-    const choices = ['rock', 'paper', 'scissors'];
-    const compChoice = choices[Math.floor(Math.random() * 3)];
+const playerHand = document.getElementById('player-hand');
+const compHand = document.getElementById('comp-hand');
+const resultText = document.getElementById('result-text');
+const playerScoreElem = document.getElementById('player-score');
+const compScoreElem = document.getElementById('comp-score');
+const choiceButtons = document.querySelectorAll('.btn');
+const resetButton = document.getElementById('reset-game');
 
-    // Update Icons
-    document.getElementById('player-hand').innerHTML = `<i class="fas ${icons[playerChoice]}"></i>`;
-    document.getElementById('comp-hand').innerHTML = `<i class="fas ${icons[compChoice]}"></i>`;
+// Sound effects - replace with your own sound file paths
+const selectSound = new Audio('sounds/select.mp3');
+const winSound = new Audio('sounds/win.mp3');
+const loseSound = new Audio('sounds/lose.mp3');
+const drawSound = new Audio('sounds/draw.mp3');
+const resetSound = new Audio('sounds/reset.mp3');
 
-    const resultTxt = document.getElementById('result-text');
+function updateHandDisplay(element, choice) {
+    element.innerHTML = `<i class="fas ${icons[choice] || icons.default}"></i>`;
+}
 
-    // Win/Loss Logic
+function animateHands() {
+    playerHand.classList.add('animate');
+    compHand.classList.add('animate');
+    setTimeout(() => {
+        playerHand.classList.remove('animate');
+        compHand.classList.remove('animate');
+    }, 500);
+}
+
+function determineWinner(playerChoice, compChoice) {
     if (playerChoice === compChoice) {
-        resultTxt.innerText = "IT'S A DRAW!";
-        resultTxt.style.color = "#ffd700";
-    } else if (
+        return 'draw';
+    }
+    if (
         (playerChoice === 'rock' && compChoice === 'scissors') ||
         (playerChoice === 'paper' && compChoice === 'rock') ||
         (playerChoice === 'scissors' && compChoice === 'paper')
     ) {
-        resultTxt.innerText = "YOU WIN! 🔥";
-        resultTxt.style.color = "#00ff88";
-        pScore++;
-    } else {
-        resultTxt.innerText = "COMP WINS! 🤖";
-        resultTxt.style.color = "#ff4757";
-        cScore++;
+        return 'player';
     }
+    return 'computer';
+}
 
-    // Update Scores
-    document.getElementById('player-score').innerText = pScore;
-    document.getElementById('comp-score').innerText = cScore;
+function playGame(playerChoice) {
+    selectSound.play(); // Play sound on selection
+
+    const choices = ['rock', 'paper', 'scissors'];
+    const compChoice = choices[Math.floor(Math.random() * choices.length)];
+
+    animateHands();
+
+    setTimeout(() => {
+        updateHandDisplay(playerHand, playerChoice);
+        updateHandDisplay(compHand, compChoice);
+
+        const winner = determineWinner(playerChoice, compChoice);
+
+        if (winner === 'draw') {
+            resultText.innerText = "IT'S A DRAW!";
+            resultText.style.color = "#ffd700";
+            drawSound.play();
+        } else if (winner === 'player') {
+            resultText.innerText = "YOU WIN! 🔥";
+            resultText.style.color = "#00ff88";
+            winSound.play();
+            playerScore++;
+            playerScoreElem.innerText = playerScore;
+        } else {
+            resultText.innerText = "COMP WINS! 🤖";
+            resultText.style.color = "#ff4757";
+            loseSound.play();
+            computerScore++;
+            compScoreElem.innerText = computerScore;
+        }
+    }, 500); // Delay to sync with animation
 }
 
 function resetGame() {
-    pScore = 0;
-    cScore = 0;
-    document.getElementById('player-score').innerText = '0';
-    document.getElementById('comp-score').innerText = '0';
-    document.getElementById('result-text').innerText = "Choose Your Weapon";
-    document.getElementById('result-text').style.color = "white";
-    document.getElementById('player-hand').innerHTML = `<i class="fas fa-hand-back-fist"></i>`;
-    document.getElementById('comp-hand').innerHTML = `<i class="fas fa-hand-back-fist"></i>`;
+    resetSound.play();
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreElem.innerText = '0';
+    compScoreElem.innerText = '0';
+    resultText.innerText = "Choose Your Weapon";
+    resultText.style.color = "white";
+    updateHandDisplay(playerHand, 'default');
+    updateHandDisplay(compHand, 'default');
 }
+
+// Event Listeners
+choiceButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const choice = button.dataset.choice;
+        playGame(choice);
+    });
+});
+
+resetButton.addEventListener('click', resetGame);
