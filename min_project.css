@@ -11,9 +11,9 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #0f0c29; /* Dark Navy */
     background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
     font-family: 'Poppins', sans-serif;
+    color: white;
 }
 
 .main-card {
@@ -25,6 +25,11 @@ body {
     text-align: center;
     width: 380px;
     backdrop-filter: blur(15px);
+    transition: transform 0.3s ease;
+}
+
+.main-card:hover {
+    transform: scale(1.02);
 }
 
 .title {
@@ -33,6 +38,7 @@ body {
     letter-spacing: 4px;
     margin-bottom: 25px;
     font-size: 1.5rem;
+    text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
 }
 
 .score-board {
@@ -46,10 +52,20 @@ body {
     padding: 10px 25px;
     border-radius: 15px;
     border-bottom: 3px solid #00d2ff;
+    min-width: 100px;
 }
 
-.label { font-size: 0.7rem; color: #aaa; display: block; }
-#player-score, #comp-score { font-size: 1.5rem; font-weight: bold; color: white; }
+.label {
+    font-size: 0.7rem;
+    color: #aaa;
+    display: block;
+}
+
+#player-score, #comp-score {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
 
 .battle-ground {
     display: flex;
@@ -62,55 +78,94 @@ body {
     font-size: 3rem;
     color: #ffd700;
     filter: drop-shadow(0 0 10px rgba(255,215,0,0.4));
+    transition: transform 0.5s ease;
+}
+
+.hand-display.animate {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0% { transform: translateY(0); }
+    25% { transform: translateY(-10px); }
+    50% { transform: translateY(0); }
+    75% { transform: translateY(-5px); }
+    100% { transform: translateY(0); }
 }
 
 .vs-badge {
     background: #ff0055;
-    padding: 5px 10px;
-    border-radius: 8px;
+    padding: 8px 16px;
+    border-radius: 12px;
     font-weight: bold;
-    font-size: 0.8rem;
+    font-size: 1rem;
+    box-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
 }
 
 #result-text {
     font-size: 1.2rem;
-    color: white;
     margin-bottom: 30px;
     height: 30px;
+    transition: color 0.3s ease;
 }
 
 .controls {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 20px;
 }
 
 .btn {
-    width: 65px;
-    height: 65px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     border: none;
-    background: white;
+    background: linear-gradient(135deg, #ffffff, #e0e0e0);
     color: #302b63;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .btn:hover {
-    background: #00d2ff;
+    background: linear-gradient(135deg, #00d2ff, #0099cc);
     color: white;
-    transform: translateY(-5px);
+    transform: translateY(-5px) rotate(5deg);
     box-shadow: 0 10px 20px rgba(0,210,255,0.4);
 }
 
-.reset-link {
-    background: none;
-    border: none;
+.btn:active {
+    transform: translateY(0);
+}
+
+.reset-btn {
+    background: transparent;
+    border: 2px solid #aaa;
     color: #aaa;
     margin-top: 30px;
+    padding: 10px 20px;
     cursor: pointer;
-    font-size: 0.8rem;
-    text-decoration: underline;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+    border-color: #00d2ff;
+    color: #00d2ff;
+    box-shadow: 0 0 10px rgba(0,210,255,0.4);
+}
+
+@media (max-width: 400px) {
+    .main-card {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .btn {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
 }
