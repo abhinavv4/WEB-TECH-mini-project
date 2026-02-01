@@ -1,4 +1,4 @@
-# Pro Rock Paper Scissors
+# Rock Paper Scissors
 
 A modern, interactive Rock Paper Scissors game built with vanilla JavaScript, featuring animations and sound effects.
 
